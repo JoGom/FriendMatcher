@@ -1,5 +1,5 @@
 //links to the files that holds the friends data array
-const friendData = require("..data/friends.js");
+let friendData = require("../data/friends");
 
 module.exports = function(app) {
     
@@ -13,10 +13,10 @@ module.exports = function(app) {
         friendData.push(req.body);
     });
 
-    app.post("/api/clear", function(req, res) {
-        // Empty out the arrays of data
-        friendData = [];
-    });
+    // app.post("/api/clear", function(req, res) {
+    //     // Empty out the arrays of data
+    //     friendData = [];
+    // });
     
 };
 

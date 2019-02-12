@@ -1,5 +1,6 @@
-//eports the html routes
-module.export = function(app) {
+
+//exports the html routes
+module.exports = function(app, path) {
     //file path for survey.html
     app.get("/survey", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/survey.html"));
