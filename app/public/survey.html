@@ -31,13 +31,13 @@
                 <h3><strong>About You</strong> </h3>
             </div>
             <div class="container">
-            <form role="form">
+            <form role="form" class="=survey-form">
             <div class="form-group">
             <label for="reserve-name"><h3>Name (Required)</h3></label>
             <input type="text" class="form-control" id="friend-name" required>
             <br>
-            <label for="reserve-image"><h3>Link to Photo Image (Required)</h3></label required>
-            <input type="text" class="form-control" id="friend-image">
+            <label for="reserve-image"><h3>Link to Photo Image (Required)</h3></label>
+            <input type="text" class="form-control" id="friend-image" required>
             <br>
             <h3>Question 1</h3>
             <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
@@ -53,7 +53,7 @@
             <br>
             <h3>Question 2</h3>
             <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
-            <select  id="q1" >
+            <select  id="q2" >
                 <option value="" selected style="display: none;">Choose an Option</option>
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -65,7 +65,7 @@
             <br>
             <h3>Question 3</h3>
             <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
-            <select id="q1" >
+            <select id="q3" >
                 <option value="" selected style="display: none;">Choose an Option</option>                
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -77,7 +77,7 @@
             <br>
             <h3>Question 4</h3>
             <h4>You rarely do something just out of sheer curiosity.</h4>
-            <select id="q1" >
+            <select id="q4" >
                 <option value="" selected style="display: none;">Choose an Option</option>                
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -89,7 +89,7 @@
             <br>
             <h3>Question 5</h3>
             <h4>People can rarely upset you.</h4>
-            <select id="q1" >
+            <select id="q5" >
                 <option value="" selected style="display: none;">Choose an Option</option> 
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -101,7 +101,7 @@
             <br>
             <h3>Question 6</h3>
             <h4>It is often difficult for you to relate to other people’s feelings.</h4>
-            <select id="q1" >
+            <select id="q6" >
                 <option value="" selected style="display: none;">Choose an Option</option> 
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -113,7 +113,7 @@
             <br>
             <h3>Question 7</h3>
             <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
-            <select id="q1" >
+            <select id="q7" >
                 <option value="" selected style="display: none;">Choose an Option</option>                 
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -125,7 +125,7 @@
             <br>
             <h3>Question 8</h3>
             <h4>You rarely get carried away by fantasies and ideas.</h4>
-            <select id="q1" >
+            <select id="q8" >
                 <option value="" selected style="display: none;">Choose an Option</option> 
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -137,7 +137,7 @@
             <br>
             <h3>Question 9</h3>
             <h4>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h4>
-            <select id="q1" >
+            <select id="q9" >
                 <option value="" selected style="display: none;">Choose an Option</option> 
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -149,7 +149,7 @@
             <br>
             <h3>Question 10</h3>
             <h4>You feel more energetic after spending time with a group of people.</h4>
-            <select id="q1" >
+            <select id="q10" >
                 <option value="" selected style="display: none;">Choose an Option</option> 
                 <option value="1">1 (Strongly Disagree)</option>
                 <option value="2">2</option>
@@ -177,7 +177,6 @@
 
 </html>
 
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
   // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
   // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
@@ -189,37 +188,40 @@
 
     // Here we grab the form elements
     let newFriend = {
-      name: $("#reserve-name").val().trim(),
-      photo: $("#reserve-phone").val().trim(),
+      name: $("#friend-name").val().trim(),
+      photo: $("#friend-image").val().trim(),
       scores: [
-          $("")
+        $("#q1").val(),
+        $("#q2").val(),
+        $("#q3").val(),
+        $("#q4").val(),
+        $("#q5").val(),
+        $("#q6").val(),
+        $("#q7").val(),
+        $("#q8").val(),
+        $("#q9").val(),
+        $("#q10").val()
       ]
     };
 
-    console.log(newReservation);
+    console.log(newFriend);
 
     // This line is the magic. It"s very similar to the standard ajax function we used.
     // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
     // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
     // depending on if a tables is available or not.
 
-    $.post("/api/tables", newReservation,
-      function(data) {
+    $.post("/api/friends", newFriend, function(data) {
 
-        // If a table is available... tell user they are booked.
-        if (data) {
-          alert("Yay! You are officially booked!");
-        }
-
-        // If a table is available... tell user they on the waiting list.
-        else {
-          alert("Sorry you are on the wait list");
-        }
 
         // Clear the form when submitting
-        $("#reserve-name").val("");
-        $("#reserve-image").val("");
-      });
+        $(".survey-form").each(function(){
+            console.log(this);
+            this.reset();
+        });
+        // $("#friend-name").val("");
+        // $("#friend-image").val("");
+    });
 
   });
 
