@@ -1,9 +1,21 @@
 
 let friendArray = [
+
     {
-       name: "Jorge",
-       photo: "picture.com",
-       scores:[3,4,5,1,2,4,2,3,1,2] 
+        name: "TEST",
+        photo: "picture.com",
+        scores:[1,2,4,1,2,4,2,2,1,2] 
+    },
+    {
+        name: "Jorge",
+        photo: "picture.com",
+        scores:[3,1,1,1,2,4,2,1,1,2]
+        
+    },
+    {
+        name: "anotha1",
+        photo: "picture.com",
+        scores:[3,1,1,1,1,1,1,3,1,2] 
     }
 ];
 
