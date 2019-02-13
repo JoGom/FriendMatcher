@@ -167,12 +167,31 @@
     </div>
 </div>
 
-    <footer class="footer">
-      <div class="container">
-        <p>
-          <a href="/api/friends">API Table Link</a> |
+<footer class="footer">
+    <div class="container">
+    <p>
+        <a href="/api/friends">API Table Link</a> |
+    </div>
+</footer>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Here is you closest match!</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+     
+            <div class="modal-body">
+              <h2 id="match-name"></h2>
+              <img id="match-img" src="" alt="">
+            </div>
+          </div>
+      
+        </div>
       </div>
-    </footer>
 </body>
 
 </html>
@@ -213,15 +232,18 @@
 
     $.post("/api/friends", newFriend, function(data) {
 
-
+        $("#match-name").text(data.friend.name);
+        $("#match-img").attr("src", data.friend.photo);
+        $("#myModal").modal("toggle");
         // Clear the form when submitting
-        $(".survey-form").each(function(){
-            console.log(this);
-            this.reset();
-        });
         // $("#friend-name").val("");
         // $("#friend-image").val("");
     });
+
+    $(".survey-form").each(function(){
+            console.log(this);
+            this.reset();
+        });
 
   });
 

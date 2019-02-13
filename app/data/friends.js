@@ -8,7 +8,7 @@ let friendArray = [
     },
     {
         name: "Jorge",
-        photo: "picture.com",
+        photo: "",
         scores:[3,1,1,1,2,4,2,1,1,2]
         
     },

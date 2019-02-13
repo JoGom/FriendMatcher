@@ -30,7 +30,6 @@ module.exports = function(app) {
         let closestMatch = bestMatchArr[0];
         //loops through the array bestmatchArr and sets closestMatch equal to where similarScore was the lowest
         for(let i = 1; i < bestMatchArr.length; i++){
-           
             if(closestMatch.similarScore > bestMatchArr[i].similarScore){
                 closestMatch = bestMatchArr[i];
             }
